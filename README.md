@@ -1,25 +1,66 @@
-# Sistema de Classificação e Resposta Automática de Emails
+# 📧 Sistema de Classificação Automática de Emails
 
-Solução completa para automatizar a leitura e classificação de emails usando inteligência artificial.
+![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)
+![Flask](https://img.shields.io/badge/Flask-2.3.3-green.svg)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow.svg)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26-orange.svg)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6-blue.svg)
+![Render](https://img.shields.io/badge/Deploy-Render-blue.svg)
 
-## Funcionalidades
+Sistema inteligente para classificação automática de emails e sugestão de respostas usando Processamento de Linguagem Natural (NLP).  
+<br>
 
-- **Classificação Automática**: Identifica se um email é Produtivo ou Improdutivo
-- **Geração de Respostas**: Sugere respostas automáticas baseadas na classificação
-- **Suporte a Múltiplos Formatos**: Aceita texto direto ou arquivos (.txt, .pdf)
-- **Interface Moderna**: Design responsivo e intuitivo
-- **Processamento com IA**: Utiliza técnicas de NLP para análise precisa
+## 🌐 Deploy
+🔗 **Acesse a aplicação online:**  
+👉 [https://desafio-tecnico-autou.onrender.com/](https://desafio-tecnico-autou.onrender.com/)
 
-## Tecnologias Utilizadas
+---
 
-- **Backend**: Python com Flask
-- **Frontend**: HTML5, CSS3, JavaScript
-- **Processamento de Texto**: Regex, pré-processamento de texto
-- **Hospedagem**: Compatível com Heroku, Vercel, AWS, etc.
+## ✨ Funcionalidades
 
-## Como Executar Localmente
+- **🤖 Classificação Automática:** identifica se um email é **Produtivo** ou **Improdutivo**  
+- **💬 Respostas Contextuais:** gera respostas automáticas baseadas na categoria  
+- **📁 Upload de Arquivos:** suporte a upload de arquivos `.txt`  ou `.pdf` 
+- **🎯 Interface Intuitiva:** design moderno e responsivo  
 
-1. Clone o repositório:
-```bash
-git clone <url-do-repositorio>
-cd email-classifier
+---
+
+## ⚙️ Como Executar Localmente
+
+### 🧩 Pré-requisitos
+- Python **3.9+**
+- **pip** (gerenciador de pacotes do Python)
+
+---
+
+### 🧰 Instalação e Execução
+
+1. **Clone o repositório**
+   ```bash
+   git clone https://github.com/HianLinhares/Desafio-Tecnico-AutoU.git
+   cd Desafio-Tecnico-AutoU
+
+2.  **Instale as dependências**
+    ```bash
+    python -m pip install -r requirements.txt
+3. **Execute a aplicaçãoI**
+    ```bash
+    python app.py
+4.  **Acesse no navegador**
+     ```bash
+      http://127.0.0.1:5000
+
+## 📊 Exemplos de Teste
+###  ✅ Email Produtivo
+"Prezados, estou com um problema crítico no sistema de pagamentos. 
+Quando tento processar uma transação, recebo o erro 'Timeout na conexão'. 
+Isso está afetando nossas operações. Solicito suporte técnico urgente."
+- Classificação: 🟢 Produtivo
+
+### ❌Email Improdutivo
+"Olá equipe, gostaria de desejar um feliz natal e um próspero ano novo para todos! 
+Obrigado pelo excelente trabalho este ano."
+- Classificação: 🔴 Improdutivo
+
+<img width="1892" height="943" alt="image" src="https://github.com/user-attachments/assets/026a5cf4-1480-459e-804d-1d427a617373" />
+
