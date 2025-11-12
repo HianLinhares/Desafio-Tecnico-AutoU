@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classificador de Emails - Sistema Automatizado</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/svgs/solid/envelope.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/svgs/solid/envelope.svg">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-envelope-open-text"></i>
+                <h1>Classificador de Emails</h1>
+            </div>
+            <p class="subtitle">Sistema automatizado de classificação e resposta para emails</p>
+        </header>
+
+        <main class="main-content">
+            <div class="upload-section">
+                <div class="card">
+                    <h2><i class="fas fa-upload"></i> Analisar Email</h2>
+                    <p class="card-description">Faça upload de um arquivo (.txt ou .pdf) ou cole o texto do email diretamente</p>
+                    
+                    <form id="emailForm" enctype="multipart/form-data">
+                        <div class="input-group">
+                            <label for="emailFile">
+                                <i class="fas fa-file-upload"></i>
+                                Upload de Arquivo
+                            </label>
+                            <input type="file" id="emailFile" name="email_file" accept=".txt,.pdf">
+                            <small>Formatos suportados: .txt, .pdf</small>
+                        </div>
+                        
+                        <div class="divider">
+                            <span>ou</span>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="emailText">
+                                <i class="fas fa-paste"></i>
+                                Cole o texto do email
+                            </label>
+                            <textarea id="emailText" name="email_text" placeholder="Cole o conteúdo do email aqui..." rows="8"></textarea>
+                        </div>
+                        
+                        <button type="submit" id="analyzeBtn" class="btn-primary">
+                            <i class="fas fa-robot"></i>
+                            Analisar Email
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="results-section" id="resultsSection" style="display: none;">
+                <div class="card">
+                    <h2><i class="fas fa-chart-bar"></i> Resultados da Análise</h2>
+                    
+                    <div class="results-grid">
+                        <div class="result-card" id="categoryCard">
+                            <div class="result-icon">
+                                <i class="fas fa-tag"></i>
+                            </div>
+                            <div class="result-content">
+                                <h3>Classificação</h3>
+                                <p class="result-value" id="categoryValue">-</p>
+                            </div>
+                        </div>
+                        
+                        <div class="result-card" id="responseCard">
+                            <div class="result-icon">
+                                <i class="fas fa-reply"></i>
+                            </div>
+                            <div class="result-content">
+                                <h3>Resposta Sugerida</h3>
+                                <p class="result-value" id="responseValue">-</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="processed-text">
+                        <h4>Texto Processado:</h4>
+                        <p id="processedText">-</p>
+                    </div>
+                    
+                    <button id="newAnalysisBtn" class="btn-secondary">
+                        <i class="fas fa-redo"></i>
+                        Nova Análise
+                    </button>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <div class="info-grid">
+                    <div class="info-card">
+                        <div class="info-icon productive">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3>Emails Produtivos</h3>
+                        <p>Solicitações de suporte, atualizações de casos, dúvidas técnicas e outras mensagens que requerem ação.</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-icon unproductive">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <h3>Emails Improdutivos</h3>
+                        <p>Mensagens de felicitações, agradecimentos e outras comunicações que não necessitam de ação imediata.</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <div class="info-icon ai">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>IA Avançada</h3>
+                        <p>Sistema utiliza processamento de linguagem natural para classificação precisa e geração de respostas contextuais.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 Sistema de Classificação de Emails. Desenvolvido para processo seletivo AutoU.</p>
+            <img class="logoAutoU" src="{{ url_for('static', filename='img/autou_logo.jfif') }}" alt="AutoU Logo" class="footer-logo">
+        </footer>
+    </div>
+
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner">
+            <i class="fas fa-cog fa-spin"></i>
+            <p>Analisando email...</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
