@@ -42,7 +42,7 @@ Sistema inteligente para classificação automática de emails e sugestão de re
 
 2.  **Instale as dependências**
     ```bash
-    pip install -r requirements.txt
+    python -m pip install -r requirements.txt
 3. **Execute a aplicaçãoI**
     ```bash
     python app.py
