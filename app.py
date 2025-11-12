@@ -6,19 +6,47 @@ import requests
 import json
 from datetime import datetime
 from dotenv import load_dotenv
+import nltk
+import ssl
+
+# ⚠️ CORREÇÃO PARA NLTK NO RAILWAY
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
+else:
+    ssl._create_default_https_context = _create_unverified_https_context
+
+# Download dos dados NLTK se necessário
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    nltk.download('punkt', quiet=True)
+
+try:
+    nltk.data.find('corpora/stopwords') 
+except LookupError:
+    nltk.download('stopwords', quiet=True)
 
 load_dotenv()
 
 app = Flask(__name__)
 
-
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 
-# Tentar importar openai, se não estiver instalado, usar fallback
+# CORREÇÃO PARA OPENAI NO RAILWAY
 try:
     import openai
-    openai.api_key = OPENAI_API_KEY
-    OPENAI_AVAILABLE = True
+    # ⚠️ FORMA CORRETA para openai >= 1.0.0
+    if hasattr(openai, 'OpenAI'):
+        client = openai.OpenAI(api_key=OPENAI_API_KEY)
+        OPENAI_AVAILABLE = True
+        print("OpenAI configurada com sucesso (versão nova)")
+    else:
+        # Para versões antigas
+        openai.api_key = OPENAI_API_KEY
+        OPENAI_AVAILABLE = True
+        print("OpenAI configurada com sucesso (versão antiga)")
 except ImportError:
     OPENAI_AVAILABLE = False
     print("OpenAI não instalada. Usando classificação por palavras-chave.")
@@ -96,7 +124,7 @@ def classify_email_with_openai(text):
             else:
                 return classify_email_fallback(text)
         else:
-            print(f"Erro OpenAI API: {response.status_code}")
+            print(f"Erro OpenAI API: {response.status_code} - {response.text}")
             return classify_email_fallback(text)
             
     except Exception as e:
@@ -201,7 +229,20 @@ def classify_email_route():
         })
     
     except Exception as e:
+        print(f"Erro no processamento: {str(e)}")
         return jsonify({'error': f'Erro no processamento: {str(e)}'}), 500
 
+@app.route('/health')
+def health_check():
+    """Rota para verificar se a aplicação está online"""
+    return jsonify({
+        'status': 'online', 
+        'timestamp': datetime.now().isoformat(),
+        'openai_available': OPENAI_AVAILABLE,
+        'platform': 'railway'
+    })
+
+# ⚠️ IMPORTANTE: Remover debug=True para produção
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
