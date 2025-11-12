@@ -1,9 +1,9 @@
 {
   "name": "classificador-emails",
-  "version": "1.0.0",
+  "version": "1.0.0", 
   "description": "Classificador de emails com IA",
   "scripts": {
-    "start": "gunicorn app:app"
+    "start": "python app.py"
   },
   "engines": {
     "node": ">=14"
