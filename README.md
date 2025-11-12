@@ -20,7 +20,7 @@ Sistema inteligente para classificação automática de emails e sugestão de re
 
 - **🤖 Classificação Automática:** identifica se um email é **Produtivo** ou **Improdutivo**  
 - **💬 Respostas Contextuais:** gera respostas automáticas baseadas na categoria  
-- **📁 Upload de Arquivos:** suporte a upload de arquivos `.txt`  
+- **📁 Upload de Arquivos:** suporte a upload de arquivos `.txt`  ou `.pdf` 
 - **🎯 Interface Intuitiva:** design moderno e responsivo  
 
 ---
