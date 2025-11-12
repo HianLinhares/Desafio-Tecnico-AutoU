@@ -168,19 +168,19 @@ body {
 }
 
 .btn-primary:hover {
-    background: var(--primary-dark);
-    transform: translateY(-2px);
+   background:#16A34A ;
+    border-color: #16A34A;
 }
 
 .btn-secondary {
-    background: var(--light);
-    color: var(--dark);
+    background:  var(--primary);
+    color: white;
     border: 2px solid var(--border);
 }
 
 .btn-secondary:hover {
-    background: white;
-    border-color: var(--primary);
+    background:#16A34A ;
+    border-color: #16A34A;
 }
 
 /* Divider */

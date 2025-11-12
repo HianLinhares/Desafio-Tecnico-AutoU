@@ -10,16 +10,23 @@ document.addEventListener('DOMContentLoaded', function() {
     const categoryCard = document.getElementById('categoryCard');
     const responseCard = document.getElementById('responseCard');
 
+    // Elementos dos inputs
+    const emailTextArea = document.getElementById('emailText');
+    const emailFileInput = document.getElementById('emailFile');
+
     // Event listener para o formulário
     emailForm.addEventListener('submit', function(e) {
         e.preventDefault();
         analyzeEmail();
     });
 
-    // Event listener para novo análise
+    // Event listener para novo análise - CORRIGIDO
     newAnalysisBtn.addEventListener('click', function() {
         resetForm();
         resultsSection.style.display = 'none';
+        
+        // ADICIONAR ESTAS LINHAS PARA REABILITAR OS INPUTS
+        enableAllInputs();
     });
 
     // Função para analisar o email
@@ -27,8 +34,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const formData = new FormData(emailForm);
         
         // Validação
-        const emailText = document.getElementById('emailText').value;
-        const emailFile = document.getElementById('emailFile').files[0];
+        const emailText = emailTextArea.value;
+        const emailFile = emailFileInput.files[0];
         
         if (!emailText && !emailFile) {
             alert('Por favor, insira o texto do email ou faça upload de um arquivo.');
@@ -92,30 +99,42 @@ document.addEventListener('DOMContentLoaded', function() {
         analyzeBtn.disabled = show;
     }
 
-    // Função para resetar o formulário
+    // Função para resetar o formulário - CORRIGIDA
     function resetForm() {
         emailForm.reset();
         categoryCard.classList.remove('productive', 'unproductive');
         responseCard.classList.remove('productive', 'unproductive');
+        
+        // ADICIONAR: Reabilitar todos os inputs ao resetar
+        enableAllInputs();
+    }
+
+    // NOVA FUNÇÃO: Reabilitar todos os inputs
+    function enableAllInputs() {
+        emailTextArea.disabled = false;
+        emailFileInput.disabled = false;
+        emailTextArea.placeholder = "Cole o texto do email aqui...";
     }
 
     // Validação em tempo real do textarea
-    const emailTextArea = document.getElementById('emailText');
     emailTextArea.addEventListener('input', function() {
         if (this.value.trim()) {
-            document.getElementById('emailFile').disabled = true;
+            emailFileInput.disabled = true;
+            this.placeholder = "Texto do email (arquivo desabilitado)";
         } else {
-            document.getElementById('emailFile').disabled = false;
+            emailFileInput.disabled = false;
+            this.placeholder = "Cole o texto do email aqui...";
         }
     });
 
     // Validação em tempo real do file input
-    const emailFileInput = document.getElementById('emailFile');
     emailFileInput.addEventListener('change', function() {
         if (this.files.length > 0) {
-            document.getElementById('emailText').disabled = true;
+            emailTextArea.disabled = true;
+            emailTextArea.placeholder = "Campo desabilitado (arquivo selecionado)";
         } else {
-            document.getElementById('emailText').disabled = false;
+            emailTextArea.disabled = false;
+            emailTextArea.placeholder = "Cole o texto do email aqui...";
         }
     });
 });
