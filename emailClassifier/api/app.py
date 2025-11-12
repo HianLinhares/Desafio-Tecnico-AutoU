@@ -6,7 +6,8 @@ import requests
 import json
 from datetime import datetime
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="../templates", static_folder="../static")
+
 
 # Configuração da API de IA (usando Hugging Face como exemplo)
 HUGGINGFACE_API_KEY = os.environ.get('HUGGINGFACE_API_KEY', 'your-api-key-here')
