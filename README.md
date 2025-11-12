@@ -51,16 +51,16 @@ Sistema inteligente para classificação automática de emails e sugestão de re
       http://127.0.0.1:5000
 
 ## 📊 Exemplos de Teste
-### Email Produtivo
+###  ✅ Email Produtivo
 "Prezados, estou com um problema crítico no sistema de pagamentos. 
 Quando tento processar uma transação, recebo o erro 'Timeout na conexão'. 
 Isso está afetando nossas operações. Solicito suporte técnico urgente."
 - Classificação: 🟢 Produtivo
 
-### Email Improdutivo
+### ❌Email Improdutivo
 "Olá equipe, gostaria de desejar um feliz natal e um próspero ano novo para todos! 
 Obrigado pelo excelente trabalho este ano."
-- Classificação: 🟡 Improdutivo
+- Classificação: 🔴 Improdutivo
 
 <img width="1892" height="943" alt="image" src="https://github.com/user-attachments/assets/026a5cf4-1480-459e-804d-1d427a617373" />
 
