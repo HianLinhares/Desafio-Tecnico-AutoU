@@ -10,26 +10,25 @@ document.addEventListener('DOMContentLoaded', function() {
     const categoryCard = document.getElementById('categoryCard');
     const responseCard = document.getElementById('responseCard');
 
-    // Elementos dos inputs
+
     const emailTextArea = document.getElementById('emailText');
     const emailFileInput = document.getElementById('emailFile');
 
-    // Event listener para o formulário
+
     emailForm.addEventListener('submit', function(e) {
         e.preventDefault();
         analyzeEmail();
     });
 
-    // Event listener para novo análise - CORRIGIDO
+
     newAnalysisBtn.addEventListener('click', function() {
         resetForm();
         resultsSection.style.display = 'none';
-        
-        // ADICIONAR ESTAS LINHAS PARA REABILITAR OS INPUTS
+
         enableAllInputs();
     });
 
-    // Função para analisar o email
+
     async function analyzeEmail() {
         const formData = new FormData(emailForm);
         
@@ -42,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Mostrar loading
+
         showLoading(true);
 
         try {
@@ -66,14 +65,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Função para exibir resultados
     function displayResults(data) {
         // Atualizar valores
         categoryValue.textContent = data.category;
         responseValue.textContent = data.response;
         processedText.textContent = data.processed_text;
 
-        // Aplicar estilos baseados na categoria
+
         if (data.category === 'Produtivo') {
             categoryCard.classList.add('productive');
             categoryCard.classList.remove('unproductive');
@@ -86,37 +84,37 @@ document.addEventListener('DOMContentLoaded', function() {
             responseCard.classList.remove('productive');
         }
 
-        // Mostrar seção de resultados
+
         resultsSection.style.display = 'block';
         
-        // Scroll suave para os resultados
+ 
         resultsSection.scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Função para mostrar/ocultar loading
+
     function showLoading(show) {
         loadingOverlay.style.display = show ? 'flex' : 'none';
         analyzeBtn.disabled = show;
     }
 
-    // Função para resetar o formulário - CORRIGIDA
+ 
     function resetForm() {
         emailForm.reset();
         categoryCard.classList.remove('productive', 'unproductive');
         responseCard.classList.remove('productive', 'unproductive');
         
-        // ADICIONAR: Reabilitar todos os inputs ao resetar
+    
         enableAllInputs();
     }
 
-    // NOVA FUNÇÃO: Reabilitar todos os inputs
+
     function enableAllInputs() {
         emailTextArea.disabled = false;
         emailFileInput.disabled = false;
         emailTextArea.placeholder = "Cole o texto do email aqui...";
     }
 
-    // Validação em tempo real do textarea
+   
     emailTextArea.addEventListener('input', function() {
         if (this.value.trim()) {
             emailFileInput.disabled = true;
@@ -127,7 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Validação em tempo real do file input
+
     emailFileInput.addEventListener('change', function() {
         if (this.files.length > 0) {
             emailTextArea.disabled = true;

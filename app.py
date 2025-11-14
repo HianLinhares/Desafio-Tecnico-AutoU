@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 import nltk
 import ssl
 
-# ⚠️ CORREÇÃO PARA NLTK NO RAILWAY
+
 try:
     _create_unverified_https_context = ssl._create_unverified_context
 except AttributeError:
@@ -17,7 +17,7 @@ except AttributeError:
 else:
     ssl._create_default_https_context = _create_unverified_https_context
 
-# Download dos dados NLTK se necessário
+
 try:
     nltk.data.find('tokenizers/punkt')
 except LookupError:
@@ -34,16 +34,16 @@ app = Flask(__name__)
 
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 
-# CORREÇÃO PARA OPENAI NO RAILWAY
+
 try:
     import openai
-    # ⚠️ FORMA CORRETA para openai >= 1.0.0
+
     if hasattr(openai, 'OpenAI'):
         client = openai.OpenAI(api_key=OPENAI_API_KEY)
         OPENAI_AVAILABLE = True
         print("OpenAI configurada com sucesso (versão nova)")
     else:
-        # Para versões antigas
+
         openai.api_key = OPENAI_API_KEY
         OPENAI_AVAILABLE = True
         print("OpenAI configurada com sucesso (versão antiga)")
@@ -51,21 +51,21 @@ except ImportError:
     OPENAI_AVAILABLE = False
     print("OpenAI não instalada. Usando classificação por palavras-chave.")
 
-# Configurações existentes
+
 HUGGINGFACE_API_KEY = os.environ.get('HUGGINGFACE_API_KEY', 'your-api-key-here')
 HUGGINGFACE_API_URL = "https://api-inference.huggingface.co/models/"
 CLASSIFICATION_MODEL = "cardiffnlp/twitter-roberta-base-sentiment-latest"
 TEXT_GENERATION_MODEL = "microsoft/DialoGPT-medium"
 
 def preprocess_text(text):
-    """Pré-processamento do texto do email"""
+
     text = re.sub(r'[^a-zA-Z\s]', '', text)
     text = text.lower()
     text = ' '.join(text.split())
     return text
 
 def extract_text_from_pdf(pdf_file):
-    """Extrai texto de arquivos PDF"""
+  
     try:
         pdf_reader = PyPDF2.PdfReader(pdf_file)
         text = ""
@@ -76,12 +76,12 @@ def extract_text_from_pdf(pdf_file):
         return f"Erro ao extrair texto do PDF: {str(e)}"
 
 def classify_email_with_openai(text):
-    """Classifica o email usando OpenAI GPT"""
+  
     if not OPENAI_AVAILABLE:
         return classify_email_fallback(text)
     
     try:
-        # Usar requests para fazer a chamada à API da OpenAI
+  
         headers = {
             "Authorization": f"Bearer {OPENAI_API_KEY}",
             "Content-Type": "application/json"
@@ -132,7 +132,7 @@ def classify_email_with_openai(text):
         return classify_email_fallback(text)
 
 def classify_email_fallback(text):
-    """Classificação fallback com palavras-chave"""
+ 
     productive_keywords = [
         'problema', 'ajuda', 'suporte', 'erro', 'solicitação', 
         'atualização', 'status', 'urgente', 'importante', 'caso',
@@ -161,7 +161,7 @@ def classify_email_fallback(text):
             return "Improdutivo"
 
 def generate_response(category, email_text):
-    """Gera resposta automática baseada na categoria"""
+  
     if category == "Produtivo":
         responses = [
             "Agradecemos seu contato. Nossa equipe analisará sua solicitação e retornará em breve.",
@@ -194,7 +194,7 @@ def index():
 @app.route('/classify', methods=['POST'])
 def classify_email_route():
     try:
-        # Verificar se o request tem dados
+     
         if 'email_text' in request.form and request.form['email_text'].strip():
             email_text = request.form['email_text']
         elif 'email_file' in request.files:
@@ -211,16 +211,16 @@ def classify_email_route():
         else:
             return jsonify({'error': 'Nenhum texto ou arquivo de email fornecido'}), 400
         
-        # Pré-processar texto
+     
         processed_text = preprocess_text(email_text)
         
-        # Classificar email usando OpenAI
+      
         category = classify_email_with_openai(processed_text)
         
-        # Gerar resposta
+   
         response = generate_response(category, email_text)
         
-        # Retornar resultado
+   
         return jsonify({
             'category': category,
             'response': response,
@@ -234,7 +234,7 @@ def classify_email_route():
 
 @app.route('/health')
 def health_check():
-    """Rota para verificar se a aplicação está online"""
+ 
     return jsonify({
         'status': 'online', 
         'timestamp': datetime.now().isoformat(),
@@ -242,7 +242,7 @@ def health_check():
         'platform': 'railway'
     })
 
-# ⚠️ IMPORTANTE: Remover debug=True para produção
+
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=False)

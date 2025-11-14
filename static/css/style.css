@@ -34,7 +34,7 @@ body {
     padding: 20px;
 }
 
-/* Header */
+
 .header {
     text-align: center;
     margin-bottom: 40px;
@@ -65,7 +65,7 @@ body {
     font-weight: 300;
 }
 
-/* Cards */
+
 .card {
     background: white;
     border-radius: var(--radius);
@@ -95,7 +95,7 @@ body {
     font-size: 0.95rem;
 }
 
-/* Form Elements */
+
 .input-group {
     margin-bottom: 20px;
 }
@@ -146,7 +146,7 @@ body {
     display: block;
 }
 
-/* Buttons */
+
 .btn-primary, .btn-secondary {
     padding: 15px 30px;
     border: none;
@@ -183,7 +183,7 @@ body {
     border-color: #16A34A;
 }
 
-/* Divider */
+
 .divider {
     text-align: center;
     margin: 25px 0;
@@ -207,7 +207,7 @@ body {
     font-size: 0.9rem;
 }
 
-/* Results Section */
+
 .results-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -282,7 +282,7 @@ body {
     letter-spacing: 0.5px;
 }
 
-/* Info Section */
+
 .info-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -337,7 +337,7 @@ body {
     line-height: 1.6;
 }
 
-/* Loading Overlay */
+
 .loading-overlay {
     position: fixed;
     top: 0;
@@ -370,7 +370,7 @@ body {
     font-weight: 500;
 }
 
-/* Footer */
+
 .footer {
     text-align: center;
     margin-top: 50px;
@@ -385,7 +385,6 @@ body {
 }
 
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .container {
         padding: 15px;
