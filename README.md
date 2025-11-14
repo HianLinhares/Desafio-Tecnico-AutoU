@@ -30,6 +30,7 @@ Sistema inteligente para classificação automática de emails e sugestão de re
 ### 🧩 Pré-requisitos
 - Python **3.9+**
 - **pip** (gerenciador de pacotes do Python)
+- Git (Para executar o comando  git clone https://github.com/HianLinhares/Desafio-Tecnico-AutoU.git)
 
 ---
 
