@@ -7,7 +7,7 @@
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6-blue.svg)
 ![Render](https://img.shields.io/badge/Deploy-Render-blue.svg)
 
-Sistema inteligente para classificação automática de emails e sugestão de respostas usando Processamento de Linguagem Natural (NLP).  
+Sistema inteligente para classificação automática de emails e sugestão de respostas 
 <br>
 
 ## 🌐 Deploy
